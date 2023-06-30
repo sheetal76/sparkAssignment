@@ -163,6 +163,40 @@ only showing top 20 rows
 Create function casehighlow()
 If case is less than 50 return low else return high
 
+>>> @udf(returnType=StringType())
+... def casehighlow(confirmed):
+...  if confirmed < 50:
+...             return "low"
+...  else:
+...             return "High"
+... 
+>>> df.withColumn("HighLow", casehighlow(df["confirmed"])).show()
++--------+--------+---------------+-----+--------------------+---------+---------+----------+-------+
+| case_id|province|           city|group|      infection_case|confirmed| latitude| longitude|HighLow|
++--------+--------+---------------+-----+--------------------+---------+---------+----------+-------+
+| 1000001|   Seoul|     Yongsan-gu| true|       Itaewon Clubs|      139|37.538621|126.992652|   High|
+| 1000002|   Seoul|      Gwanak-gu| true|             Richway|      119| 37.48208|126.901384|   High|
+| 1000003|   Seoul|        Guro-gu| true| Guro-gu Call Center|       95|37.508163|126.884387|   High|
+| 1000004|   Seoul|   Yangcheon-gu| true|Yangcheon Table T...|       43|37.546061|126.874209|    low|
+| 1000005|   Seoul|      Dobong-gu| true|     Day Care Center|       43|37.679422|127.044374|    low|
+| 1000006|   Seoul|        Guro-gu| true|Manmin Central Ch...|       41|37.481059|126.894343|    low|
+| 1000007|   Seoul|from other city| true|SMR Newly Planted...|       36|        -|         -|    low|
+| 1000008|   Seoul|  Dongdaemun-gu| true|       Dongan Church|       17|37.592888|127.056766|    low|
+| 1000009|   Seoul|from other city| true|Coupang Logistics...|       25|        -|         -|    low|
+| 1000010|   Seoul|      Gwanak-gu| true|     Wangsung Church|       30|37.481735|126.930121|    low|
+| 1000011|   Seoul|   Eunpyeong-gu| true|Eunpyeong St. Mar...|       14| 37.63369|  126.9165|    low|
+| 1000012|   Seoul|   Seongdong-gu| true|    Seongdong-gu APT|       13| 37.55713|  127.0403|    low|
+| 1000013|   Seoul|      Jongno-gu| true|Jongno Community ...|       10| 37.57681|   127.006|    low|
+| 1000014|   Seoul|     Gangnam-gu| true|Samsung Medical C...|        7| 37.48825| 127.08559|    low|
+| 1000015|   Seoul|        Jung-gu| true|Jung-gu Fashion C...|        7|37.562405|126.984377|    low|
+| 1000016|   Seoul|   Seodaemun-gu| true|  Yeonana News Class|        5|37.558147|126.943799|    low|
+| 1000017|   Seoul|      Jongno-gu| true|Korea Campus Crus...|        7|37.594782|126.968022|    low|
+| 1000018|   Seoul|     Gangnam-gu| true|Gangnam Yeoksam-d...|        6|        -|         -|    low|
+| 1000019|   Seoul|from other city| true|Daejeon door-to-d...|        1|        -|         -|    low|
+| 1000020|   Seoul|   Geumcheon-gu| true|Geumcheon-gu rice...|        6|        -|         -|    low|
++--------+--------+---------------+-----+--------------------+---------+---------+----------+-------+
+only showing top 20 rows
+
 
 
 
